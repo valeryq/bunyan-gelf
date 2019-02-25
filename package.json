@@ -1,0 +1,18 @@
+{
+  "name": "bunyan-gelf",
+  "version": "1.0.0",
+  "description": "Bunyan logs to GELF throught UDT socket",
+  "main": "index.js",
+  "repository": "https://github.com/valeryq/bunyan-gelf",
+  "author": "Valery Zakharchenko",
+  "license": "MIT",
+  "keywords": [
+    "bunyan",
+    "stream",
+    "gelf",
+    "graylog"
+  ],
+  "dependencies": {
+    "circular-json": "^0.5.9"
+  }
+}
