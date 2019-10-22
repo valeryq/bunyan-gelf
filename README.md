@@ -32,7 +32,7 @@ const BunyanToGelfStream = require('bunyan-gelf');
 const streams = [{
  type: 'raw',
  stream: new BunyanToGelfStream({
-   host: 'https://log-service.example', // GELF related service url
+   host: 'log-service.example', // GELF related service url (without any protocol)
    port: 9999,
  }),
 }];
