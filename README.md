@@ -34,6 +34,7 @@ const streams = [{
  stream: new BunyanToGelfStream({
    host: 'log-service.example', // GELF related service url (without any protocol)
    port: 9999,
+   protocol: 'tcp', // Supported: 'tcp' and 'udp' (default: 'udp')
  }),
 }];
 

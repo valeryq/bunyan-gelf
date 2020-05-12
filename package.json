@@ -1,6 +1,6 @@
 {
   "name": "bunyan-gelf",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Bunyan logs to GELF throught UDP socket",
   "main": "index.js",
   "repository": "https://github.com/valeryq/bunyan-gelf",
