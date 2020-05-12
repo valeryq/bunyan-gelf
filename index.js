@@ -1,6 +1,5 @@
-const dgram = require('dgram');
-const zlib = require('zlib');
-const JSON = require('circular-json');
+const Tcp = require('./transports/Tcp');
+const Udp = require('./transports/Udp');
 
 const LEVELS = {
   EMERGENCY: 0,
@@ -20,31 +19,10 @@ class BunyanToGelfStream {
    * @param options
    * @param options.host
    * @param options.port
+   * @param options.protocol Protocol can be 'udp' or 'tcp'
    */
   constructor(options = {}) {
-    this._host = options.host || '127.0.0.1';
-    this._port = options.port || 9999;
-
-    this._client = null;
-  }
-
-  /**
-   * Singleton
-   * Create dgram UDP socket client
-   *
-   * @return {Socket | *}
-   * @private
-   */
-  client() {
-    if (!this._client) {
-      this._client = dgram.createSocket('udp4');
-
-      this._client.on('error', error => {
-        console.log('BunyanToGelfStream socket connection error', error);
-      });
-    }
-
-    return this._client;
+    this._transport = options.protocol === 'tcp' ? new Tcp(options) : new Udp(options);
   }
 
   /**
@@ -96,14 +74,7 @@ class BunyanToGelfStream {
       message[`_${key}`] = log[key];
     });
 
-    const buffer = Buffer.from(JSON.stringify(message));
-
-    // Gzipping is required to send to log services
-    zlib.gzip(buffer, (err, compressed) => {
-      if (!err) {
-        this.client().send(compressed, 0, compressed.length, this._port, this._host);
-      }
-    });
+    this._transport.send(message);
   }
 }
 
