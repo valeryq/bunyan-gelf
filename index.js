@@ -1,5 +1,7 @@
-const Tcp = require('./transports/Tcp');
-const Udp = require('./transports/Udp');
+const { Writable } = require("node:stream");
+
+const Tcp = require("./transports/Tcp");
+const Udp = require("./transports/Udp");
 
 const LEVELS = {
   EMERGENCY: 0,
@@ -12,7 +14,7 @@ const LEVELS = {
   DEBUG: 7,
 };
 
-class BunyanToGelfStream {
+class BunyanToGelfStream extends Writable {
   /**
    * BunyanToGelfStream
    *
@@ -22,7 +24,9 @@ class BunyanToGelfStream {
    * @param options.protocol Protocol can be 'udp' or 'tcp'
    */
   constructor(options = {}) {
-    this._transport = options.protocol === 'tcp' ? new Tcp(options) : new Udp(options);
+    super();
+    this._transport =
+      options.protocol === "tcp" ? new Tcp(options) : new Udp(options);
   }
 
   /**
@@ -79,4 +83,3 @@ class BunyanToGelfStream {
 }
 
 module.exports = BunyanToGelfStream;
-
