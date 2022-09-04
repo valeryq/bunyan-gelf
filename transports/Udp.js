@@ -45,6 +45,7 @@ class Udp {
     zlib.gzip(buffer, (err, compressed) => {
       if (!err) {
         const client = this._createClient();
+       
         client.send(
           compressed,
           0,
