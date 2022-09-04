@@ -13,8 +13,6 @@ class Udp {
   constructor(options = {}) {
     this._host = options.host || '127.0.0.1';
     this._port = options.port || 9999;
-
-    this._client = this._createClient();
   }
 
   /**
@@ -27,8 +25,9 @@ class Udp {
   _createClient() {
     const client = dgram.createSocket('udp4');
 
-    client.on('error', error => {
+    client.on('error', (error) => {
       console.log('BunyanToGelfStream UDP socket connection error', error);
+      client.close();
     });
 
     return client;
@@ -45,7 +44,17 @@ class Udp {
     // Gzipping is required to send to log services
     zlib.gzip(buffer, (err, compressed) => {
       if (!err) {
-        this._client.send(compressed, 0, compressed.length, this._port, this._host);
+        const client = this._createClient();
+        client.send(
+          compressed,
+          0,
+          compressed.length,
+          this._port,
+          this._host,
+          () => {
+            client.close();
+          }
+        );
       }
     });
   }
