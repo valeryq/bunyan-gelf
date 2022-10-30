@@ -1,8 +1,6 @@
 <div align="center">
   <h1>
-    <br/>
       bunyan-gelf
-    <br />
   </h1>
     <sup>
     <a href="https://www.npmjs.com/package/bunyan-gelf">
