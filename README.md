@@ -1,7 +1,18 @@
-bunyan-gelf
------------
-![npm version](https://img.shields.io/npm/v/bunyan-gelf?colorB=brightgreen&style=flat-square)
-![npm download](https://img.shields.io/npm/dt/bunyan-gelf.svg?style=flat-square)
+<div align="center">
+  <h1>
+    <br/>
+      bunyan-gelf
+    <br />
+  </h1>
+    <sup>
+    <a href="https://www.npmjs.com/package/bunyan-gelf">
+      <img src="https://img.shields.io/npm/v/bunyan-gelf.svg" alt="npm package" />
+    </a>
+    <a href="https://www.npmjs.com/package/bunyan-gelf">
+      <img src="https://img.shields.io/npm/dt/bunyan-gelf.svg" alt="npm downloads" />
+    </a>
+  </sup>
+</div>
 
 Bunyan stream to send logs in GELF format to GELF related log collecting services).
 
