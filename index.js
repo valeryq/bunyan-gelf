@@ -62,6 +62,10 @@ class BunyanToGelfStream extends Writable {
    * @param log
    */
   write(log) {
+    if (typeof log === 'string') {
+      log = JSON.parse(log);
+    }
+
     const message = {
       host: log.hostname,
       timestamp: +new Date(log.time) / 1000,
